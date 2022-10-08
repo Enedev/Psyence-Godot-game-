@@ -1,0 +1,93 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/art/background/space_background.png" type="Texture" id=1]
+[ext_resource path="res://assets/theme/fonts/Retro Gaming.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/art/background/semilla.png" type="Texture" id=3]
+[ext_resource path="res://src/Main/seedg.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 83
+font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "anim"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+
+[node name="seed_games" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color( 1, 0.772549, 0.772549, 1 )
+self_modulate = Color( 0.756863, 0.686275, 1, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -14.0133
+margin_top = -5.82215
+margin_right = 3.98669
+margin_bottom = 10.1779
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 54.7557
+margin_top = -37.0822
+margin_right = 54.7557
+margin_bottom = 68.9178
+rect_pivot_offset = Vector2( -612.305, -172.095 )
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="seed_games" type="Label" parent="VBoxContainer"]
+margin_left = 92.0
+margin_right = 707.0
+margin_bottom = 106.0
+size_flags_horizontal = 4
+custom_fonts/font = SubResource( 1 )
+text = "SEED GAMES"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="VBoxContainer/seed_games"]
+position = Vector2( -13.1348, 2.62602 )
+scale = Vector2( 0.466942, 0.460742 )
+texture = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/anim = SubResource( 2 )

@@ -1,0 +1,143 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/audio/music/Psyence_main_theme.ogg" type="AudioStream" id=1]
+[ext_resource path="res://assets/theme/fonts/Retro Gaming.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://src/UserInterface/GameOverScreen.gd" type="Script" id=3]
+[ext_resource path="res://assets/theme/user_interface.tres" type="Theme" id=4]
+[ext_resource path="res://assets/art/background/space_background.png" type="Texture" id=5]
+[ext_resource path="res://assets/audio/sfx/click_buttom.wav" type="AudioStream" id=6]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.164706, 0.152941, 0.152941, 1 )
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 90
+outline_size = 10
+outline_color = Color( 0.726563, 0.20844, 0.0681152, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "gameover"
+tracks/0/type = "value"
+tracks/0/path = NodePath("PanelContainer/MarginContainer/Rows/psyence:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="GameOverScreen" type="CanvasLayer"]
+script = ExtResource( 3 )
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 790.0
+margin_bottom = 470.0
+texture = ExtResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 790.0
+margin_bottom = 470.0
+custom_constants/margin_right = 40
+custom_constants/margin_top = 40
+custom_constants/margin_left = 40
+custom_constants/margin_bottom = 40
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Rows" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 740.0
+margin_bottom = 420.0
+custom_constants/separation = 60
+
+[node name="psyence" type="Label" parent="PanelContainer/MarginContainer/Rows"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 55.0
+margin_right = 644.0
+margin_bottom = 115.0
+size_flags_horizontal = 4
+custom_fonts/font = SubResource( 2 )
+text = "GAME OVER"
+align = 1
+valign = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/MarginContainer/Rows"]
+margin_top = 175.0
+margin_right = 700.0
+margin_bottom = 307.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/Rows/CenterContainer"]
+margin_left = 281.0
+margin_right = 418.0
+margin_bottom = 132.0
+custom_constants/separation = 40
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RestartButton2" type="Button" parent="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer"]
+margin_right = 137.0
+margin_bottom = 46.0
+theme = ExtResource( 4 )
+text = "RESTART"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuitButton" type="Button" parent="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer"]
+margin_top = 86.0
+margin_right = 137.0
+margin_bottom = 132.0
+theme = ExtResource( 4 )
+text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sounds" type="Node2D" parent="." groups=[
+"sounds",
+]]
+
+[node name="click" type="AudioStreamPlayer2D" parent="sounds"]
+stream = ExtResource( 6 )
+
+[node name="game_over" type="AudioStreamPlayer" parent="sounds"]
+stream = ExtResource( 1 )
+autoplay = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/gameover = SubResource( 3 )
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer/RestartButton2" to="." method="_on_RestartButton2_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
